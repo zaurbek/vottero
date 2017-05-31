@@ -1,0 +1,13 @@
+extends base
+
+block vars
+  -var title="My Profile"
+
+block body
+  h1 Account
+  p.
+    Welcome to your profile page Comrade! Thank you for using best service for anonymous voting on the planet.
+
+  h2 User Information:
+  p Name: #{user.firstName}
+  p Email: #{user.email}

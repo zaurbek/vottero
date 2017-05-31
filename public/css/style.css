@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.navbar {
+  border-radius: 0px !important;
+  margin-bottom: 0px !important
+}
+.jumbotron {
+  margin-top: 0px !important;
+}
+@media (min-width: 768px) {
+.rightfloat {
+  float: right !important;
+}
+}
+
+#wall {
+  text-align: center;
+  color: #FFF !important;
+  background-color:  #00C07F !important;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bold;
+}
+.titlefont {
+  font-family: 'Righteous', cursive !important;
+}
+nav.navbar.navbar-inverse {
+  color: #FFF!important;
+  background-color: #313D4B !important;
+}
+.hello {
+  background-color: transparent;
+}
+.col-center-block {
+    float: none;
+    display: block;
+    margin: 0 auto;
+    /* margin-left: auto; margin-right: auto; */
+}
+
+.grey {
+  opacity: 0.7;
+}
+.github-fork-ribbon.right-top:before {
+            background-color: #f80;
+            padding-bottom: 4px;
+        }
+

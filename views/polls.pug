@@ -1,0 +1,16 @@
+extends base
+
+block vars
+  -var title="My Polls"
+
+block body
+  h1 Choose any of your poll to see results:
+  hr
+  if error
+      .alert.alert-danger
+          p #{error}
+
+  each element in array
+    a(href='/poll/'+element.number)
+      .well.well-sm.text-center
+        span=element.question

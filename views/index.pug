@@ -1,0 +1,13 @@
+extends base
+
+block vars
+  -var title = 'Home'
+
+block body
+  h1 Try any of public polls:
+  hr
+
+  each element in array
+    a(href='/poll/'+element.number)
+      .well.well-sm.text-center
+        span=element.question

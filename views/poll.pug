@@ -1,0 +1,148 @@
+extends base
+
+block vars
+    -var title="Poll"
+
+
+block body
+    script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+    h1 Poll data:
+    if error
+        .alert.alert-danger
+            p #{error}
+    .jumbotron2
+      #picture
+      if user
+        p Creator: #{creator}
+
+          if creator==user.email
+            form(method='post' action='/deletepoll')
+              .form-group
+                input(type="hidden", name="pollid", value=pollid)
+
+              button(type='submit', class='btn btn-danger btn-block') Delete this poll
+
+
+            form(method='post' action='/voteforpoll')
+              .form-group
+                input(type='hidden',name='pollid',value=pollid)
+                input(type='hidden',name='email',value=user.email)
+                input(type='hidden',name='voted',value=voted)
+                input(type='hidden',name='answers',value=answerss)
+                input(type='hidden',name='voprosik',value=voprosik)
+                input(type='hidden',name='creator',value=creator)
+                label(for='select') Select answer:
+                select(name='chosen')#select.form-control
+                  each element in answerss
+                      option=element.split('~')[0]
+
+              button(type='submit', class='btn btn-lg btn-default') Submit my answer.
+
+            | <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="Hello everyone, I found this beatiful and amazing service for voting right here" data-lang="en" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+          else
+            form(method='post' action='/voteforpoll')
+              .form-group
+                input(type='hidden',name='pollid',value=pollid)
+                input(type='hidden',name='email',value=user.email)
+                input(type='hidden',name='voted',value=voted)
+                input(type='hidden',name='answers',value=answerss)
+                input(type='hidden',name='voprosik',value=voprosik)
+                input(type='hidden',name='creator',value=creator)
+                label(for='select') Select answer:
+                select(name='chosen')#select.form-control
+                  each element in answerss
+                      option=element.split('~')[0]
+
+              button(type='submit', class='btn btn-lg btn-default') Submit my answer.
+            | <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="Hello everyone, I found this beatiful and amazing service for voting right here" data-lang="en" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+          form(method='post' action='/addanswer')
+            .form-group
+              input(type='hidden',name='pollid',value=pollid)
+              input(type='hidden',name='email',value=user.email)
+              input(type='hidden',name='voted',value=voted)
+              input(type='hidden',name='answers',value=answerss)
+              label(for='extra') Write your own answer:
+              input(type='text', name='extra', id="extra",required=true, class='form-control')
+
+            button(type='submit', class='btn btn-lg btn-info') Submit my own answer.
+
+
+      else
+        form(method='post' action='/voteforpoll')
+          .form-group
+            input(type='hidden',name='pollid',value=pollid)
+            input(type='hidden',name='answers',value=answerss)
+            input(type='hidden',name='voprosik',value=voprosik)
+            input(type='hidden',name='creator',value=creator)
+            label(for='select') Select answer:
+            select(name='chosen')#select.form-control
+              each element in answerss
+                option=element.split('~')[0]
+
+            button(type='submit', class='btn btn-lg btn-default') Submit my anonymous answer.
+          | <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="Hello everyone, I found this beatiful and amazing service for voting right here" data-lang="en" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+block script
+
+    script.
+        var logined=#{auth}
+        var object1=!{json}
+        console.log(object1)
+        if (logined) {
+          google.charts.load("current", {packages:["corechart"]});
+          google.charts.setOnLoadCallback(drawChart);
+          function drawChart() {
+                var arrayfordraw=[];
+                arrayfordraw[0]=['Answer','Voted for'];
+                for (var x=0; x<object1.answers.length; x++) {
+                    var splitted=object1.answers[x].split('~')
+                    arrayfordraw[x+1]=[splitted[0],Number(splitted[1])]
+                }
+                var data = google.visualization.arrayToDataTable(arrayfordraw);
+
+                var options = {
+                    title: object1.question,
+                    pieHole: 0.4,
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('picture'));
+                chart.draw(data, options);
+          }
+
+
+
+
+
+
+        } else {
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+              var arrayfordraw=[];
+              arrayfordraw[0]=['Answer','Voted for'];
+              for (var x=0; x<object1.answers.length; x++) {
+                  var splitted=object1.answers[x].split('~')
+                  arrayfordraw[x+1]=[splitted[0],Number(splitted[1])]
+              }
+              var data = google.visualization.arrayToDataTable(arrayfordraw);
+
+              var options = {
+                  title: object1.question,
+                  pieHole: 0.4,
+              };
+
+              var chart = new google.visualization.PieChart(document.getElementById('picture'));
+              chart.draw(data, options);
+            }
+
+
+
+
+
+        }

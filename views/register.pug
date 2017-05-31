@@ -1,0 +1,25 @@
+extends base
+
+block vars
+  -var title = "Register"
+
+block body
+  h1 Create an Account
+  if error
+    .alert.alert-danger
+      p #{error}
+  form(method='post')
+    .form-group
+      label(for='firstName') First name:
+      input(type='text', name='firstName',required=true,class='form-control')
+
+    .form-group
+      label(for='email') Email:
+      input(type='email', name='email',required=true,class='form-control')
+
+    .form-group
+      label(for='password') Password:
+      input(type='password',name='password',required=true,class='form-control')
+
+
+    button(type='submit' class="btn btn-default btn-lg") Register My Account!

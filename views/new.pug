@@ -1,0 +1,21 @@
+extends base
+
+block vars
+  -var title="New Poll"
+
+block body
+  h1 New Poll
+  br
+
+  form(method='post')
+    .form-group
+      label(for='question') Question:
+      input(type='text', name='question', required=true, class='form-control')
+    br
+    .form-group
+      label(for='answers') Answers separated by ";":
+      input(type='text', name='answers', required=true, class='form-control')
+      input(type="hidden", name="email", value=user.email )
+      input(type="hidden", name="firstName", value=user.firstName)
+
+    button(type='submit', class='btn btn-default btn-lg') Submit my Poll

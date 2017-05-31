@@ -1,0 +1,81 @@
+block vars
+doctype html
+html
+  head
+    <link rel="shortcut icon" href="./favicon.ico">
+    style
+      include ../public/css/style.css
+      include ../public/css/bootstrap.css
+    title Vottero | #{title}
+    script(src="https://use.fontawesome.com/079efd2572.js")
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css')
+  body
+    | <a class="github-fork-ribbon right-top" href="https://github.com/zooll8/vottero" target="_blank" title="Fork me on GitHub">Fork me on GitHub</a>
+    nav.navbar.navbar-inverse
+      .container
+        .navbar-header
+          a.titlefont.navbar-brand(href='/')
+            i.fa.fa-user-secret(aria-hidden='true')
+              span.titlefont  Vottero
+
+
+        ul.nav.navbar-nav
+          if user
+            li
+              a(href='/dashboard') Dashboard
+        ul.nav.navbar-nav.rightfloat
+          if !user
+            li
+              a(href='/login') Login
+          if !user
+            li
+              a(href='/register') Register
+          if user
+            li
+              a(href='/profile') Hi #{user.firstName}
+
+          if user
+            li
+              a(href='/logout') Logout
+
+      </div>
+    </nav>
+
+    .jumbotron#wall
+      h1
+        i.fa.fa-user-secret(aria-hidden='true')
+          span.titlefont  Vottero™
+
+      h3
+        if user
+          a(href='/new')
+            button.btn.btn-warning.btn-lg Start new Poll
+          a(href='/polls')
+            button.btn.btn-info.btn-lg View My Polls
+        else
+          p
+            span Your own anonymous voting service
+            br
+            br
+            a(href='/register')
+              button.btn.btn-warning.btn-lg Register Now!
+            a(href='/login')
+              button.btn.btn-info.btn-lg I already have account
+
+    .col-sm-6.col-sm-offset-3
+      block body
+
+      hr
+      p.grey Vottero Inc. 2017 Coded with&nbsp;
+        i.fa.fa-heart(aria-hidden='true')
+        span  by&nbsp;
+        a(href='https://www.freecodecamp.com/zooll8' target="_blank") Zooll
+        
+      
+      a(href='https://www.github.com/Zooll8/vottero' target="_blank") Github
+        
+      br
+      br
+     
+    block script
+  
